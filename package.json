@@ -1,0 +1,37 @@
+{
+  "name": "@sudorpc/mixin-jwt-authentication",
+  "version": "1.0.0",
+  "description": "JWT Authentication Mixin for SudoRPC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SudoRPC/SudoRPC-TypeScript-Mixin-JWT-Authentication.git"
+  },
+  "keywords": [
+    "RPC"
+  ],
+  "author": "WMXPY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SudoRPC/SudoRPC-TypeScript-Mixin-JWT-Authentication/issues"
+  },
+  "homepage": "https://github.com/SudoRPC/SudoRPC-TypeScript-Mixin-JWT-Authentication#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@sudoo/triforce": "^3.7.0"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "instrument": true,
+    "reporter": [
+      "json",
+      "text-summary"
+    ],
+    "report-dir": "coverage",
+    "sourceMap": true
+  }
+}
