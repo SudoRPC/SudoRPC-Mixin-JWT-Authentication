@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace JWTAuthentication
+ * @namespace Placeholder
  * @description Placeholder
  * @override Unit Test
  */
