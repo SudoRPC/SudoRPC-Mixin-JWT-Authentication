@@ -15,7 +15,9 @@
     "url": "https://github.com/SudoRPC/SudoRPC-TypeScript-Mixin-JWT-Authentication/issues"
   },
   "homepage": "https://github.com/SudoRPC/SudoRPC-TypeScript-Mixin-JWT-Authentication#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@sudoo/jwt": "^3.4.0"
+  },
   "devDependencies": {
     "@sudoo/triforce": "^3.7.0"
   },
