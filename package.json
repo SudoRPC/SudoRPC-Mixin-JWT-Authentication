@@ -18,8 +18,12 @@
   "dependencies": {
     "@sudoo/jwt": "^3.4.0"
   },
+  "peerDependencies": {
+    "@sudorpc/core": "*"
+  },
   "devDependencies": {
-    "@sudoo/triforce": "^3.7.0"
+    "@sudoo/triforce": "^3.7.0",
+    "@sudorpc/core": "^1.1.0"
   },
   "nyc": {
     "extension": [
