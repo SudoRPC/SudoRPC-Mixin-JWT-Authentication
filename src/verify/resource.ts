@@ -20,6 +20,17 @@ export const createSudoRPCMixinJWTAuthenticationVerifyResource = <Metadata, Payl
             helper: SudoRPCMiddlewareHandlerHelper<Metadata, Payload, FailResult>,
         ) => {
 
+            const authentication: string | undefined = fixedConfig.retrieveToken(context);
+
+            if (typeof authentication === "undefined") {
+
+                return helper.createShouldAbortReturn(
+                    "Authentication token not found",
+                    "Authentication token not found",
+                    {} as any,
+                );
+            }
+
             return helper.createShouldContinueReturn();
         },
         {

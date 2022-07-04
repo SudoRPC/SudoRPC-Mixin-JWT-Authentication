@@ -4,7 +4,7 @@
  * @description Declare
  */
 
-import { SudoRPCHandlerContext, SudoRPCMiddlewareHandlerHelper, SudoRPCMiddlewareResource } from "@sudorpc/core";
+import { SudoRPCHandlerContext } from "@sudorpc/core";
 
 export const SudoRPCMixinJWTAuthenticationVerifyDefaultResourceName = "sudorpc-mixin-jwt-authentication-verify";
 export const SudoRPCMixinJWTAuthenticationVerifyDefaultDependencyName = "sudorpc-mixin-jwt-authentication-verify";
@@ -13,6 +13,8 @@ export type SudoRPCMixinJWTAuthenticationVerifyConfig = {
 
     readonly resourceName: string;
     readonly dependencyName: string;
+
+    readonly retrieveToken: (context: SudoRPCHandlerContext<any, any>) => string | undefined;
 };
 
 export const fixSudoRPCMixinJWTAuthenticationVerifyConfig = (config?: Partial<SudoRPCMixinJWTAuthenticationVerifyConfig>): SudoRPCMixinJWTAuthenticationVerifyConfig => {
@@ -21,6 +23,10 @@ export const fixSudoRPCMixinJWTAuthenticationVerifyConfig = (config?: Partial<Su
 
         resourceName: SudoRPCMixinJWTAuthenticationVerifyDefaultResourceName,
         dependencyName: SudoRPCMixinJWTAuthenticationVerifyDefaultDependencyName,
+
+        retrieveToken: (context: SudoRPCHandlerContext<any, any>) => {
+            return context.getMetadataKey("authentication");
+        },
     };
 
     return {
