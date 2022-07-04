@@ -6,10 +6,15 @@
  */
 
 import { SudoRPCEndpointHandlerHelper, SudoRPCEndpointResource, SudoRPCEndpointResourceHandlerReturn, SudoRPCHandlerContext, SudoRPCService } from "@sudorpc/core";
+import { createSudoRPCMixinJWTAuthentication, SudoRPCMixinJWTAuthenticationVerifyDefaultDependencyName } from "../../src";
 
-export const createEchoerService = (): SudoRPCService<any, any, any, any> => {
+export const createEchoerService = (publicKey: string): SudoRPCService<any, any, any, any> => {
 
     const service: SudoRPCService<any, any, any, any> = SudoRPCService.create("echoer");
+
+    service.useMixin(
+        createSudoRPCMixinJWTAuthentication(publicKey),
+    );
 
     service.register(
         SudoRPCEndpointResource.create("echo", (
@@ -21,6 +26,9 @@ export const createEchoerService = (): SudoRPCService<any, any, any, any> => {
                 context.getDefaultContextMap(),
             );
         }, {
+            dependencies: [
+                SudoRPCMixinJWTAuthenticationVerifyDefaultDependencyName,
+            ],
             exposed: true,
         }),
     );
