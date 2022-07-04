@@ -5,6 +5,7 @@
  * @override Integration Test
  */
 
+import { JWTCreator } from "@sudoo/jwt";
 import { generateKeyPair, KeyPair } from "@sudoo/token";
 import { SudoRPCCallManager } from "@sudorpc/core";
 import { expect } from "chai";
@@ -15,6 +16,7 @@ import { MockLocalCallProxy } from "../mock/proxy/local-call";
 describe('Given (Counter) Integration Test Scenario', (): void => {
 
     const keyPair: KeyPair = generateKeyPair();
+    const tokenCreator: JWTCreator = JWTCreator.instantiate(keyPair.private);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const chance: Chance.Chance = new Chance('counter-counter');
@@ -34,8 +36,15 @@ describe('Given (Counter) Integration Test Scenario', (): void => {
 
     it('should be able to execute echo', async (): Promise<void> => {
 
-        const result: any = await callManager.makeCall("echo", {}, {});
+        const token: string = tokenCreator.create({
+            header: {},
+            body: {},
+        });
 
-        expect(result).to.be.equal({});
+        const result: any = await callManager.makeCall("echo", {
+            "authentication": token,
+        }, {});
+
+        expect(result).to.be.deep.equal(new Map());
     });
 });
