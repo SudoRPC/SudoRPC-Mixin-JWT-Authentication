@@ -46,7 +46,7 @@ describe('Given (Counter) Integration Test Scenario', (): void => {
         }, {});
 
         expect(result).to.be.deep.equal({
-            token: token,
+            token,
         });
     });
 });
