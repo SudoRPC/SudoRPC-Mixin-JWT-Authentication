@@ -7,6 +7,8 @@
 
 JWT Authentication Mixin for SudoRPC
 
+## Install
+
 ```sh
 yarn add @sudorpc/mixin-jwt-authentication
 yarn add @sudorpc/core # Peer Dependency
