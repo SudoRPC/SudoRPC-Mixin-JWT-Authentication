@@ -92,6 +92,8 @@ export const createSudoRPCMixinJWTAuthenticationVerifyResource = <Metadata, Payl
                 );
             }
 
+            fixedConfig.placeTokenMethod(context, instance);
+
             return helper.createShouldContinueReturn();
         },
         {

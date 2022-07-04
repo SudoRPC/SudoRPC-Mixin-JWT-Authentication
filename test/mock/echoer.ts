@@ -5,6 +5,7 @@
  * @override Mock
  */
 
+import { JWTToken } from "@sudoo/jwt";
 import { SudoRPCEndpointHandlerHelper, SudoRPCEndpointResource, SudoRPCEndpointResourceHandlerReturn, SudoRPCHandlerContext, SudoRPCService } from "@sudorpc/core";
 import { createSudoRPCMixinJWTAuthentication, SudoRPCMixinJWTAuthenticationVerifyDefaultDependencyName } from "../../src";
 
@@ -22,8 +23,12 @@ export const createEchoerService = (publicKey: string): SudoRPCService<any, any,
             helper: SudoRPCEndpointHandlerHelper<any, any, any, any>,
         ): SudoRPCEndpointResourceHandlerReturn<any, any> => {
 
+            const token: JWTToken = context.getDefaultContext("token");
+
             return helper.createSuccessReturn(
-                context.getDefaultContextMap(),
+                {
+                    token: token.rawToken,
+                },
             );
         }, {
             dependencies: [

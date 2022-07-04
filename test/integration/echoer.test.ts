@@ -45,6 +45,8 @@ describe('Given (Counter) Integration Test Scenario', (): void => {
             "authentication": token,
         }, {});
 
-        expect(result).to.be.deep.equal(new Map());
+        expect(result).to.be.deep.equal({
+            token: token,
+        });
     });
 });

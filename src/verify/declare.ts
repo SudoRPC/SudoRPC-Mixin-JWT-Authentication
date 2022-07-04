@@ -4,6 +4,7 @@
  * @description Declare
  */
 
+import { JWTToken } from "@sudoo/jwt";
 import { SudoRPCHandlerContext } from "@sudorpc/core";
 
 export const SudoRPCMixinJWTAuthenticationVerifyDefaultResourceName = "sudorpc-mixin-jwt-authentication-verify";
@@ -16,8 +17,13 @@ export type SudoRPCMixinJWTAuthenticationVerifyConfig = {
 
     readonly getCurrentTimeMethod: () => Date;
 
-    readonly retrieveAuthenticationMethod: (context: SudoRPCHandlerContext<any, any>) => string | undefined;
-    readonly placeTokenMethod: (context: SudoRPCHandlerContext<any, any>, token: string) => void;
+    readonly retrieveAuthenticationMethod: (
+        context: SudoRPCHandlerContext<any, any>,
+    ) => string | undefined;
+    readonly placeTokenMethod: (
+        context: SudoRPCHandlerContext<any, any>,
+        token: JWTToken,
+    ) => void;
 };
 
 export const fixSudoRPCMixinJWTAuthenticationVerifyConfig = (config?: Partial<SudoRPCMixinJWTAuthenticationVerifyConfig>): SudoRPCMixinJWTAuthenticationVerifyConfig => {
@@ -31,10 +37,15 @@ export const fixSudoRPCMixinJWTAuthenticationVerifyConfig = (config?: Partial<Su
             return new Date();
         },
 
-        retrieveAuthenticationMethod: (context: SudoRPCHandlerContext<any, any>) => {
+        retrieveAuthenticationMethod: (
+            context: SudoRPCHandlerContext<any, any>,
+        ) => {
             return context.getMetadataKey("authentication");
         },
-        placeTokenMethod: (context: SudoRPCHandlerContext<any, any>, token: string) => {
+        placeTokenMethod: (
+            context: SudoRPCHandlerContext<any, any>,
+            token: JWTToken,
+        ) => {
             context.setDefaultContext("token", token);
             return;
         },
