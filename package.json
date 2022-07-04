@@ -22,6 +22,7 @@
     "@sudorpc/core": "*"
   },
   "devDependencies": {
+    "@sudoo/token": "^1.6.1",
     "@sudoo/triforce": "^3.7.0",
     "@sudorpc/core": "^1.1.0"
   },
