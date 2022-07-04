@@ -14,7 +14,10 @@ export type SudoRPCMixinJWTAuthenticationVerifyConfig = {
     readonly resourceName: string;
     readonly dependencyName: string;
 
-    readonly retrieveToken: (context: SudoRPCHandlerContext<any, any>) => string | undefined;
+    readonly getCurrentTimeMethod: () => Date;
+
+    readonly retrieveAuthenticationMethod: (context: SudoRPCHandlerContext<any, any>) => string | undefined;
+    readonly placeTokenMethod: (context: SudoRPCHandlerContext<any, any>, token: string) => void;
 };
 
 export const fixSudoRPCMixinJWTAuthenticationVerifyConfig = (config?: Partial<SudoRPCMixinJWTAuthenticationVerifyConfig>): SudoRPCMixinJWTAuthenticationVerifyConfig => {
@@ -24,8 +27,13 @@ export const fixSudoRPCMixinJWTAuthenticationVerifyConfig = (config?: Partial<Su
         resourceName: SudoRPCMixinJWTAuthenticationVerifyDefaultResourceName,
         dependencyName: SudoRPCMixinJWTAuthenticationVerifyDefaultDependencyName,
 
-        retrieveToken: (context: SudoRPCHandlerContext<any, any>) => {
+        getCurrentTimeMethod: () => new Date(),
+
+        retrieveAuthenticationMethod: (context: SudoRPCHandlerContext<any, any>) => {
             return context.getMetadataKey("authentication");
+        },
+        placeTokenMethod: (context: SudoRPCHandlerContext<any, any>, token: string) => {
+            context.setDefaultContext("token", token);
         },
     };
 
