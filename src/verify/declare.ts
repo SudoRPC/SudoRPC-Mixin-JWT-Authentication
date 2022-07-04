@@ -27,13 +27,16 @@ export const fixSudoRPCMixinJWTAuthenticationVerifyConfig = (config?: Partial<Su
         resourceName: SudoRPCMixinJWTAuthenticationVerifyDefaultResourceName,
         dependencyName: SudoRPCMixinJWTAuthenticationVerifyDefaultDependencyName,
 
-        getCurrentTimeMethod: () => new Date(),
+        getCurrentTimeMethod: () => {
+            return new Date();
+        },
 
         retrieveAuthenticationMethod: (context: SudoRPCHandlerContext<any, any>) => {
             return context.getMetadataKey("authentication");
         },
         placeTokenMethod: (context: SudoRPCHandlerContext<any, any>, token: string) => {
             context.setDefaultContext("token", token);
+            return;
         },
     };
 
