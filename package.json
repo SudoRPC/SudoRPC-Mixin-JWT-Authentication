@@ -24,6 +24,7 @@
   "devDependencies": {
     "@sudoo/token": "^1.6.1",
     "@sudoo/triforce": "^3.7.0",
+    "@sudorpc/client-local": "^1.0.0",
     "@sudorpc/core": "^1.1.0"
   },
   "nyc": {

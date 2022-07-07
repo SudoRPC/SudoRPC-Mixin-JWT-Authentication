@@ -7,11 +7,11 @@
 
 import { JWTCreator } from "@sudoo/jwt";
 import { generateKeyPair, KeyPair } from "@sudoo/token";
+import { SudoRPCLocalProxy } from "@sudorpc/client-local";
 import { SudoRPCCallManager } from "@sudorpc/core";
 import { expect } from "chai";
 import * as Chance from "chance";
 import { createEchoerService } from "../mock/echoer";
-import { MockLocalCallProxy } from "../mock/proxy/local-call";
 
 describe('Given (Counter) Integration Test Scenario', (): void => {
 
@@ -25,7 +25,7 @@ describe('Given (Counter) Integration Test Scenario', (): void => {
 
     beforeEach((): void => {
         callManager = SudoRPCCallManager.create(
-            MockLocalCallProxy.create(createEchoerService(keyPair.public)),
+            SudoRPCLocalProxy.create(createEchoerService(keyPair.public)),
         );
         callManager.ignite();
     });
